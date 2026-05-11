@@ -1,0 +1,21 @@
+
+Napisany w języku Python program składa się z trzech modułów:
+- moduł intro.py odpowiedzialny jest za wczytanie i normalizację danych,
+- moduł calcul.py to główny moduł obliczeniowy,
+- moduł loop.py jest modułem uruchamjającym obliczenia w funkcji main().
+Dwa pierwsze moduły mają funkcje test() ułatwiające testowanie modułu.
+
+Prosze pamiętać, że zasadniczą sprawą jest wybór liczby klastrów. Ponieważ nie mamy na temat liczby klastrów żadnej wiedzy początkowej, skazani jesteśmy na eksperymentowanie metodą prób i błędów, jak liczba klastrów wpływa na możliwości wydobycia wiedzy z danych.
+
+Ilość nawrotów pętli w module loop.py można ustalić w drodze obserwacji poprzez kilkakrotne uruchomienie programu z wyprowadzaniem tylko centroid  w każdym nawrocie pętli. Po pewnej niewielkiej ilości nawrotów pętli wartości we wszystkich centroidach nie powinny się już wyraźnie zmieniać.
+
+Stosunkowo długi czas oczekiwania na wynik wynika nie z czasu obliczeń, a z czasu wyprowadzania wyników do interpretera.
+
+Załączony (liczący ok. 100 rekordów) plik danych o nazwie dane_midi.txt może posłużyć do testowania budowy programu, ale nie do merytorycznej analizy wyników, bowiem jest tylko dość przypadkowym wyciągiem z rzeczywistych danych.
+
+Bibliografia:
+https://www.statystyka.az.pl/analiza-skupien/metoda-k-srednich.php
+http://divideetimpera.net/k-means-pelne-wyjasnienie-implementacja-python/
+https://www.statsoft.pl/textbook/stathome_stat.html?https%3A%2F%2Fwww.statsoft.pl%2Ftextbook%2Fstcluan.html
+
+
