@@ -26,7 +26,7 @@ states={'AK':2,'AL':4,'AR':6,'AZ':8,'CA':10,'CO':12,'CT':14,'DC':16,'DE':18,
 sex=   {'F':0,'M':1}
 #2 razy musi byc narazie samantha bo z jakiegos powodu inaczej jej nie czyta???? postaram sie to naprawic 
 names= {'Mary':1,'Linda':2,'Debra':3,'Lisa':4,'Michelle':5,'Jennifer':6,'Jessica':7,
-        'Samantha':8,'Samantha':8,'Ashley':9,'Hannah':10,'Madison':11,'Emma':12,'Isabella':13,
+        'Samantha':8,'Ashley':9,'Hannah':10,'Madison':11,'Emma':12,'Isabella':13,
         'Olivia':14,'Kimberly':15,'Angela':16,'Amanda':17,'Emily':18,'Mia':19,
         'Sophia':20,'Barbara':21,'Susan':22,'Karen':23,'Patricia':24,'Alexis':25,
         'Kayla':26,'Katherine':27,'Deborah':28,'Donna':29,'Sarah':30,'Ava':31,
@@ -93,7 +93,7 @@ def normalizujDane():
 
       #YEAR normalizacja Min-Max
       third=krotkiDane[i][2]
-      result=(int(third)-1910)/(2020-1910)
+      result=(int(third)-1910)/(2012-1910)
       krotka.append(result)
 
       #NAME zakres normalizacja Min-Max
