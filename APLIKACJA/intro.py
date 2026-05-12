@@ -3,7 +3,7 @@
 # słowniki normalizacyjne do zmiennych tekstowych,
 # funkcje wczytywania i wypisywania krotek,
 # funkcję normalizacji danych
-import math
+import os
 
 def test():
     wczytajDane()
@@ -16,6 +16,8 @@ krotkiNormal=[]
 zdenormalizowaneKlastry = []
 zdenormalizowaneCentroidy = []
 
+sciezkaDoDanychCsv = os.path.join('..','TopBabyNamesbyState.csv')
+
 # definicje słowników normalizacyjnych dla zmiennych tekstowych
 states={'AK':2,'AL':4,'AR':6,'AZ':8,'CA':10,'CO':12,'CT':14,'DC':16,'DE':18,
         'FL':20,'GA':22,'HI':24,'IA':26,'ID':28,'IL':30,'IN':32,'KS':34,'KY':36,
@@ -24,7 +26,6 @@ states={'AK':2,'AL':4,'AR':6,'AZ':8,'CA':10,'CO':12,'CT':14,'DC':16,'DE':18,
         'OK':74,'OR':76,'PA':78,'RI':80,'SC':82,'SD':84,'TN':86,'TX':88,'UT':90,
         'VA':92,'VT':94,'WA':96,'WI':98,'WV':100,'WY':102}
 sex=   {'F':0,'M':1}
-#2 razy musi byc narazie samantha bo z jakiegos powodu inaczej jej nie czyta???? postaram sie to naprawic 
 names= {'Mary':1,'Linda':2,'Debra':3,'Lisa':4,'Michelle':5,'Jennifer':6,'Jessica':7,
         'Samantha':8,'Ashley':9,'Hannah':10,'Madison':11,'Emma':12,'Isabella':13,
         'Olivia':14,'Kimberly':15,'Angela':16,'Amanda':17,'Emily':18,'Mia':19,
@@ -32,15 +33,15 @@ names= {'Mary':1,'Linda':2,'Debra':3,'Lisa':4,'Michelle':5,'Jennifer':6,'Jessica
         'Kayla':26,'Katherine':27,'Deborah':28,'Donna':29,'Sarah':30,'Ava':31,
         'Brittany':32,'Helen':33,'Shirley':34,'Carol':35,'Taylor':36,'Chloe':37,
         'Betty':38,'Sharon':39,'Julie':40,'Lori':41,'Addison':42,'Dorothy':43,
-        'Samantha':44,'Margaret':45,'Megan':46,'Jasmine':47,'Melissa':48,'Judith':49,
-        'Nancy':50,'Sandra':51,'Joan':52,'Alyssa':53,'Ruth':54,'Cindy':55,'Brenda':56,
-        'John':57,'Robert':58,'Michael':59,'David':60,'Christopher':61,'Jacob':62,
-        'Ethan':63,'James':64,'Aiden':65,'William':66,'Mason':67,'Justin':68,
-        'Jason':69,'Joshua':70,'Angel':71,'Anthony':72,'Daniel':73,'Alexander':74,
-        'Liam':75,'Matthew':76,'Ryan':77,'Jayden':78,'George':79,'Richard':80,
-        'Noah':81,'Carter':82,'Tyler':83,'Logan':84,'Samuel':85,'Elijah':86,
-        'Larry':87,'Austin':88,'Owen':89,'Wyatt':90,'Jose':91,'Joe':92,
-        'Isaiah':93,'Benjamin':94,'Nicholas':95,'Andrew':96,}
+        'Margaret':44,'Megan':45,'Jasmine':46,'Melissa':47,'Judith':48,
+        'Nancy':49,'Sandra':50,'Joan':51,'Alyssa':52,'Ruth':53,'Cindy':54,'Brenda':55,
+        'John':56,'Robert':57,'Michael':58,'David':59,'Christopher':60,'Jacob':61,
+        'Ethan':62,'James':63,'Aiden':64,'William':65,'Mason':66,'Justin':67,
+        'Jason':68,'Joshua':69,'Angel':70,'Anthony':71,'Daniel':72,'Alexander':73,
+        'Liam':74,'Matthew':75,'Ryan':76,'Jayden':77,'George':78,'Richard':79,
+        'Noah':80,'Carter':81,'Tyler':82,'Logan':83,'Samuel':84,'Elijah':85,
+        'Larry':86,'Austin':87,'Owen':88,'Wyatt':89,'Jose':90,'Joe':91,
+        'Isaiah':92,'Benjamin':93,'Nicholas':94,'Andrew':95,}
 
 def wczytajDane():
 # wczytuje dane ze wskazanego pliku tekstowego do listy krotkiDane
@@ -49,7 +50,9 @@ def wczytajDane():
    with open('dane_midi.txt','r') as csvfile:
       csvreader = csv.reader(csvfile)
       for krotka in csvreader:
-         krotkiDane.append(krotka)
+         if 'State' in krotka: #warunek żeby nie wczytywać nazw kolumn z pliku z danymi
+            continue
+         else: krotkiDane.append(krotka)
 
 def wypiszDane():
 # wypisuje zawartość listy krotkiDane do interpretera
@@ -98,7 +101,7 @@ def normalizujDane():
 
       #NAME zakres normalizacja Min-Max
       forth = krotkiDane[i][3]
-      nameNorm = (names[forth]-1)/(96-1)
+      nameNorm = (names[forth]-1)/(95-1)
       krotka.append(nameNorm)
 
       #OCCURRENCES normalizacja Min-Max
@@ -134,14 +137,14 @@ def denormalizujDane(klastry):
             sex = 'M'
          else: sex = 'F'
 
-         year = int((klastry[i][j][2]*(2020-1910))+1910)
+         year = int((klastry[i][j][2]*(2012-1910))+1910)
 
-         nameNmbr = int(round(klastry[i][j][3]*(96-1))+1)
+         nameNmbr = int(round(klastry[i][j][3]*(95-1))+1)
          for key, val in names.items():
             if val == nameNmbr:
                name = key
                break
-            #chwilowa zaslepka jakby cos sie zepsulo
+            #odkomentowac jakby cos sie zepsulo
             #else: name = nameNmbr
 
          occurences =  int((klastry[i][j][4]*(maxOcc - minOcc))+minOcc)
@@ -172,14 +175,14 @@ def denormalizujCentroidy(centroidy):
             sex = 'M'
       else: sex = 'F'
 
-      year = int((centroidy[i][2]*(2020-1910))+1910)
+      year = int((centroidy[i][2]*(2012-1910))+1910)
 
-      nameNmbr = int(round((centroidy[i][3]*(96-1)))+1)
+      nameNmbr = int(round((centroidy[i][3]*(95-1)))+1)
       for key, val in names.items():
             if val == nameNmbr:
                name = key
                break
-            #chwilowa zaslepka jakby cos sie zepsulo
+            #odkomentowac jakby cos sie zepsulo
             #else: name = nameNmbr
 
       occurences =  int((centroidy[i][4]*(maxOcc - minOcc))+minOcc)
