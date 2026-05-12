@@ -14,6 +14,7 @@ def test():
 krotkiDane=[]
 krotkiNormal=[]
 zdenormalizowaneKlastry = []
+zdenormalizowaneKlastryBezNrCentroid = []
 zdenormalizowaneCentroidy = []
 
 sciezkaDoDanychCsv = os.path.join('..','TopBabyNamesbyState.csv')
@@ -189,4 +190,12 @@ def denormalizujCentroidy(centroidy):
       daneTmp = [state, sex, year, name, occurences]
       zdenormalizowaneCentroidyTmp.append(daneTmp)
    zdenormalizowaneCentroidy = zdenormalizowaneCentroidyTmp
+   
+def formatujKlastry():
+   #usuwa nr centroida do ktorego naleza dane aby ladnie mozna je bylo wyswietlic
+   global zdenormalizowaneKlastryBezNrCentroid
+   zdenormalizowaneKlastryBezNrCentroid = zdenormalizowaneKlastry.copy()
+   for i in range(len(zdenormalizowaneKlastry)):
+      for j in range(len(zdenormalizowaneKlastry[i])):
+         zdenormalizowaneKlastryBezNrCentroid[i][j].pop(5)
 
