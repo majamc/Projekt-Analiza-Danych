@@ -1,7 +1,7 @@
 import intro
 import calcul
 
-liczbaPowtórzeń=4
+liczbaPowtórzeń=3
 # ograniczenie liczby powtórzeń pętli
 
 def main():
@@ -9,19 +9,28 @@ def main():
     intro.wczytajDane()
     intro.normalizujDane()
     calcul.losujCentroidy()
-    calcul.wypiszCentroidy()
+    
+    intro.denormalizujCentroidy(calcul.Centroidy)
+    #calcul.wypiszCentroidy()
+    calcul.wypiszCentroidyDenormalizowane()
     calcul.przypiszKrotkomNumeryKlastrów()
     calcul.utwórzKlastry()
-    calcul.wypiszKlastry()
+    intro.denormalizujDane(calcul.klastry)
+    #calcul.wypiszKlastry()
+    calcul.wypiszKlastryDenormalizowane()
     
     # poniżej założono blokadę pętli (zdjełam blokade)
     repeat=0
     while repeat < liczbaPowtórzeń:
         calcul.newCentroidy()
-        calcul.wypiszCentroidy()
+        intro.denormalizujCentroidy(calcul.Centroidy)
+        #calcul.wypiszCentroidy()
+        calcul.wypiszCentroidyDenormalizowane()
         calcul.przypiszKrotkomNumeryKlastrów()
         calcul.utwórzKlastry()
-        calcul.wypiszKlastry()
+        intro.denormalizujDane(calcul.klastry)
+        #calcul.wypiszKlastry()
+        calcul.wypiszKlastryDenormalizowane()
         repeat+=1
 
 main()

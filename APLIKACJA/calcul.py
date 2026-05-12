@@ -7,7 +7,7 @@ import math
 import random
 import intro
 
-liczbaKlastrów=5
+liczbaKlastrów=10
 # poczatkowa liczba klastrów
 klastry=[]
 #każdy z klastrów jest listą krotekNormal położonych najbliżej centroidy
@@ -58,12 +58,22 @@ def wypiszCentroide(centroida):
        print ('%7.3f %7.3f %7.3f %7.3f %7.3f'%
               (centroida[0],centroida[1],centroida[2],
                centroida[3],centroida[4]))
+       
+def wypiszCentroideDenormalizowana(centroida):
+       print (centroida[0],centroida[1],centroida[2],
+               centroida[3],centroida[4])
 
 def wypiszCentroidy():
 # wypisuje do interpretera aktualne wartości wszystkich centroid
    print('CENTROIDY')
    for centroida in Centroidy:
       wypiszCentroide(centroida)
+      
+def wypiszCentroidyDenormalizowane():
+# wypisuje do interpretera aktualne wartości wszystkich zdenormalizowany centroid
+   print('CENTROIDY')
+   for centroida in intro.zdenormalizowaneCentroidy:
+      wypiszCentroideDenormalizowana(centroida)
 
 def EuklidesPower(krotkaNormal,centroida):
 # zwraca kwadrat odległości euklidesowej danej krotkiNormal od danej centroidy
@@ -103,11 +113,21 @@ def wypiszKlaster(nrKlastra):
         print ('%7.3f %7.3f %7.3f %7.3f %7.3f %4d'%(krotka[0],krotka[1],
                                             krotka[2],krotka[3],
                                             krotka[4],krotka[5]))
+        
+def wypiszKlasterDenormalizowany(nrKlastra):
+    print('NUMER KLASTRA ',nrKlastra)
+    for krotka in intro.zdenormalizowaneKlastry[nrKlastra]:
+        print (krotka[0],krotka[1],krotka[2],krotka[3],krotka[4],krotka[5])
 
 def wypiszKlastry():
 # wypisuje do interpretera aktualne wartości wszystkich klastrów
     for numer in range(0,len(Centroidy)):
        wypiszKlaster(numer)
+
+def wypiszKlastryDenormalizowane():
+# wypisuje do interpretera aktualne wartości wszystkich zdenormalizowanych klastrów
+    for numer in range(0,len(Centroidy)):
+       wypiszKlasterDenormalizowany(numer)
 
 def newCentroide(klaster):
 # oblicza nowe położenie centroidy we wskazanym klastrze
