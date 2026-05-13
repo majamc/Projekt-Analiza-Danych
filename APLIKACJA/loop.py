@@ -21,6 +21,9 @@ def main():
     #calcul.wypiszKlastryDenormalizowane()
     intro.formatujKlastry()
     eda.tabeleDlaKlastrów()
+
+    #tu zmieniamy ilość klastów
+    eda.optimise_k_means(15)
     
     # poniżej założono blokadę pętli (zdjełam blokade)
     repeat=0

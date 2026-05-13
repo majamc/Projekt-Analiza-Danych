@@ -47,8 +47,7 @@ names= {'Mary':1,'Linda':2,'Debra':3,'Lisa':4,'Michelle':5,'Jennifer':6,'Jessica
 def wczytajDane():
 # wczytuje dane ze wskazanego pliku tekstowego do listy krotkiDane
    import csv
-    #używam dane mini do testowania
-   with open('dane_midi.txt','r') as csvfile:
+   with open('Dane.txt','r') as csvfile:
       csvreader = csv.reader(csvfile)
       for krotka in csvreader:
          if 'State' in krotka: #warunek żeby nie wczytywać nazw kolumn z pliku z danymi
