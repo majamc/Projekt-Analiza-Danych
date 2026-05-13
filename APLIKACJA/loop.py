@@ -2,7 +2,7 @@ import intro
 import calcul
 import eda
 
-liczbaPowtórzeń=3
+liczbaPowtórzeń=1
 # ograniczenie liczby powtórzeń pętli
 
 def main():
