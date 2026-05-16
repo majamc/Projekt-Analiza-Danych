@@ -1,0 +1,10 @@
+AK,F,1927,Mary,30
+UT,F,2011,Olivia,236
+TX,M,1999,Jose,2939
+CA,F,1930,Mary,1851
+FL,M,1986,Michael,3074
+HI,M,1910,John,22
+AL,M,2009,William,508
+DE,F,2005,Madison,68
+VT,M,1922,Robert,189
+AR,F,1977,Jennifer,577

@@ -32,8 +32,8 @@ def tabeleDlaKlastrów():
         else: 
             print(df)
             #odkomentowac te dwie linijki pod jesli chcesz zobaczyc wykresy
-        #tabelaScatterplot(df, i, axes)
-    #plt.show()
+        tabelaScatterplot(df, i, axes)
+    plt.show()
 
 #narazie zrobilam tak ale nwm czy to jest optymalne kiedy bedziemy miec wiecej danych i klastrow
 #plus te legendy co znacza punkty sa strasznie duze i dlugie
@@ -50,6 +50,7 @@ def tabelaScatterplot(df, i, axes):
     )
     axes[i].set_title(f'Klaster {i}')
 # podobno lepiej użyć tylko x, y, hue, ax dla przejrzystości
+#tylko wtedy dwie cechy nie beda wgl obrazowane :c
 
 #obliczanie poprawnej ilości klastrów
 def optimise_k_means(max_k):
