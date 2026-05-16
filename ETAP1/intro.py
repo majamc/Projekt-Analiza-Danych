@@ -85,7 +85,7 @@ def normalizujDane():
    for i in range(len(krotkiDane)):
       krotka=[]
 
-      #STATE zakres 0-1
+      #STATE normalizacja Min-Max ze slownika normalizacyjnego
       first = krotkiDane[i][0]
       stateNorm = (states[first]-2)/(102-2)
       krotka.append(stateNorm)
@@ -99,7 +99,7 @@ def normalizujDane():
       result=(int(third)-1910)/(2012-1910)
       krotka.append(result)
 
-      #NAME zakres normalizacja Min-Max
+      #NAME normalizacja Min-Max ze slownika normalizacyjnego
       forth = krotkiDane[i][3]
       nameNorm = (names[forth]-1)/(95-1)
       krotka.append(nameNorm)
