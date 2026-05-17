@@ -7,7 +7,7 @@ import math
 import random
 import intro
 
-liczbaKlastrów=6
+liczbaKlastrów=4
 # poczatkowa liczba klastrów
 klastry=[]
 #każdy z klastrów jest listą krotekNormal położonych najbliżej centroidy
