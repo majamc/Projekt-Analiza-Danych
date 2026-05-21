@@ -38,7 +38,7 @@ def tabeleDlaKlastrów():
 #narazie zrobilam tak ale nwm czy to jest optymalne kiedy bedziemy miec wiecej danych i klastrow
 #plus te legendy co znacza punkty sa strasznie duze i dlugie
 def tabelaScatterplot(df, i, axes):
-    #tworzy wykres rozrzutu dla wszystkich danych danej centroidy
+    #tworzy wykres rozrzutu dla wszystkich danych danego klastra
     sns.scatterplot(
         data=df,
         x='Occurences',

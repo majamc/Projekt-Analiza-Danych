@@ -191,7 +191,7 @@ def denormalizujCentroidy(centroidy):
    zdenormalizowaneCentroidy = zdenormalizowaneCentroidyTmp
    
 def formatujKlastry():
-   #usuwa nr centroida do ktorego naleza dane aby ladnie mozna je bylo wyswietlic
+   #usuwa nr centroidy do ktorego naleza dane aby ladnie mozna je bylo wyswietlic
    global zdenormalizowaneKlastryBezNrCentroid
    zdenormalizowaneKlastryBezNrCentroid = zdenormalizowaneKlastry.copy()
    for i in range(len(zdenormalizowaneKlastry)):

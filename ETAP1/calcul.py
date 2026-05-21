@@ -161,6 +161,7 @@ def newCentroide(klaster):
         centroida.append(sumMalName/numMalName)
     centroida.append(sumEven/len(klaster))
     return centroida
+
 def newCentroidy():
     global Centroidy
     noweCentroidy=[]

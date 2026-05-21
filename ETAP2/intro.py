@@ -9,12 +9,12 @@ zdenormalizowaneCentroidy = []
 #slowniki normalizacyjne
 gender = {"Female": 0, "Male": 1}
 medicalCondition = {"Cancer": 0, "Obesity": 1, "Diabetes": 2, "Arthritis": 3, "Hypertension": 4, "Asthma": 5}
-medication = {"Lipitor": 0, "Ibuprofen": 1, "Aspirin": 2, "Paracetamol": 3, "Penicillin": 4}
+medicationName = {"Lipitor": 0, "Ibuprofen": 1, "Aspirin": 2, "Paracetamol": 3, "Penicillin": 4}
 admissionType = {"Elective": 0, "Urgent": 1, "Emergency": 2}
 
 def wczytajDane():
 #wczytanie danych ze zbioru do listy krotkiDane
-   with open('HealthcareDataset.csv','r') as csvfile:
+   with open('HealthcareDataset_midi.csv','r') as csvfile:
       csvreader = csv.reader(csvfile)
       for krotka in csvreader:
          if 'Gender' in krotka: #warunek żeby nie wczytywać nazw kolumn z pliku z danymi
@@ -31,7 +31,7 @@ def minMaxAge():
    return minAge, maxAge
 
 def normalizujDane():
-#normalizowanie dane z listy krotkiDane i wpisuje je do listy krotkiNormal
+#normalizowanie danych z listy krotkiDane i wpisanie ich do listy krotkiNormal
 #-1 oznacza, że nie wpisano jeszcze numeru klastra, do którego należy krotka
 
    minAge, maxAge = minMaxAge()
@@ -55,7 +55,7 @@ def normalizujDane():
 
       #MEDICATION normalizacja Min-Max ze slownika normalizacyjnego
       forth = krotkiDane[i][3]
-      medicationNorm = medication[forth]/4
+      medicationNorm = medicationName[forth]/4
       krotka.append(medicationNorm)
 
       #ADMISSION TYPE normalizacja Min-Max ze slownika normalizacyjnego
@@ -63,13 +63,12 @@ def normalizujDane():
       admissionNorm = admissionType[fifth]/2
       krotka.append(admissionNorm)
 
-      #numer klastra
+      #numer klastra (narazie -1)
       krotka.append(-1)
-      #dodanie rekordu
       krotkiNormal.append(krotka)
       
 def denormalizujDane(klastry):
-   #denormalizuje dane z klastrów żeby można je było łatwo przeczytać
+   #denormalizowanie danych z klastrów żeby można je było łatwo przeczytać
    global zdenormalizowaneKlastry
    minAge, maxAge = minMaxAge()
    zdenormalizowaneKlastryTmp = []
@@ -89,7 +88,7 @@ def denormalizujDane(klastry):
                break
 
          medicationNmbr = int(klastry[i][j][3]*4)
-         for key, val in medication.items():
+         for key, val in medicationName.items():
             if val == medicationNmbr:
                medication = key
                break
@@ -104,3 +103,45 @@ def denormalizujDane(klastry):
          daneCentroidow.append(daneTmp)
       zdenormalizowaneKlastryTmp.append(daneCentroidow)
    zdenormalizowaneKlastry = zdenormalizowaneKlastryTmp
+
+def denormalizujCentroidy(centroidy):
+   #denormalizowanie danych z centroid żeby można je było łatwo przeczytać
+   global zdenormalizowaneCentroidy
+   minAge, maxAge = minMaxAge()
+   zdenormalizowaneCentroidyTmp = []
+   for i in range(len(centroidy)):
+      age = int((centroidy[i][0]*(maxAge - minAge))+minAge)
+
+      if centroidy[i][1] == 1:
+            gender = 'Male'
+      else: gender = 'Female'
+
+      conditionNmbr = int(centroidy[i][2]*5)
+      for key, val in medicalCondition.items():
+            if val == conditionNmbr:
+               condition = key
+               break
+
+      medicationNmbr = int(centroidy[i][3]*4)
+      for key, val in medicationName.items():
+            if val == medicationNmbr:
+               medication = key
+               break
+           
+      admissionNmbr = int(centroidy[i][4]*2)
+      for key, val in admissionType.items():
+            if val == admissionNmbr:
+               admission = key
+               break
+
+      daneTmp = [age, gender, condition, medication, admission]
+      zdenormalizowaneCentroidyTmp.append(daneTmp)
+   zdenormalizowaneCentroidy = zdenormalizowaneCentroidyTmp
+   
+def formatujKlastry():
+   #usuwanie nr centroidy do ktorego naleza dane aby ladnie mozna je bylo wyswietlic
+   global zdenormalizowaneKlastryBezNrCentroid
+   zdenormalizowaneKlastryBezNrCentroid = zdenormalizowaneKlastry.copy()
+   for i in range(len(zdenormalizowaneKlastry)):
+      for j in range(len(zdenormalizowaneKlastry[i])):
+         zdenormalizowaneKlastryBezNrCentroid[i][j].pop(5)

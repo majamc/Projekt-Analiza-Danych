@@ -17,6 +17,38 @@ df = pd.read_csv("HealthcareDataset.csv")
 # plt.title('Liczba przykładów dla każdego wieku')
 # plt.show()
 
+def tabeleDlaKlastrów():
+    #wypisywanie klastrów w formie tabelek i wyświetlanie wykresów dla klastrów
+    fig, axes = plt.subplots(2, 3, figsize=(14, 6)) #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
+    axes = axes.flatten()
+    for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
+        df = pd.DataFrame({"Age": [], "Gender": [], "Medical Condition": [], "Medication": [], "Admission Type": []})
+        nrKlastra = i
+        print('')
+        print('Tabela danych dla klastra', nrKlastra)
+        for j in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid[i])):
+            df.loc[len(df)] = intro.zdenormalizowaneKlastryBezNrCentroid[i][j]
+        if df.empty:
+            print('Brak danych w klastrze')
+        else: 
+            print(df)
+            #odkomentowac te dwie linijki pod jesli chcesz zobaczyc wykresy
+    #     tabelaScatterplot(df, i, axes)
+    # plt.show()
+    
+def tabelaScatterplot(df, i, axes):
+    #wykres rozrzutu dla wszystkich danych danego klastra
+    sns.scatterplot(
+        data=df,
+        x='Age',
+        y='Medical Condition',
+        size='Admission Type',
+        hue='Gender',
+        style='Medication',
+        ax=axes[i]
+    )
+    axes[i].set_title(f'Klaster {i}')
+
 def optimise_k_means(max_k):
     #tworzymy tabele z danych znormalizowanych
     data = pd.DataFrame(
