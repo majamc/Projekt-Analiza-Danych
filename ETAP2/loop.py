@@ -12,7 +12,7 @@ def main():
     
     intro.denormalizujCentroidy(calcul.Centroidy)
     calcul.wypiszCentroidyDenormalizowane()
-    calcul.przypiszKrotkomNumeryKlastrów()
+    calcul.przypiszKrotkomNumeryKlastrów('manhattan') #jećli chce się uzyć mahnattan to zmienić na 'manhattan' (jakiekolwiek inne słowo będzie oznaczało, że kod użyje euklidesa)
     calcul.utwórzKlastry()
     intro.denormalizujDane(calcul.klastry)
     intro.formatujKlastry()
@@ -26,7 +26,7 @@ def main():
         calcul.newCentroidy()
         intro.denormalizujCentroidy(calcul.Centroidy)
         calcul.wypiszCentroidyDenormalizowane()
-        calcul.przypiszKrotkomNumeryKlastrów()
+        calcul.przypiszKrotkomNumeryKlastrów('manhattan') #tutaj tez trzeba zmieniac
         calcul.utwórzKlastry()
         intro.denormalizujDane(calcul.klastry)
         intro.formatujKlastry()

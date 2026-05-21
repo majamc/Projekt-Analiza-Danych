@@ -19,8 +19,10 @@ df = pd.read_csv("HealthcareDataset.csv")
 
 def tabeleDlaKlastrów():
     #wypisywanie klastrów w formie tabelek i wyświetlanie wykresów dla klastrów
-    fig, axes = plt.subplots(2, 3, figsize=(14, 6)) #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
-    axes = axes.flatten()
+    #odkomentowac 2 linijki ponizej jesli chce sie zobaczyc wykresy !!!
+    # fig, axes = plt.subplots(2, 3, figsize=(14, 6))
+    # axes = axes.flatten()
+    #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
     for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
         df = pd.DataFrame({"Age": [], "Gender": [], "Medical Condition": [], "Medication": [], "Admission Type": []})
         nrKlastra = i
@@ -32,7 +34,7 @@ def tabeleDlaKlastrów():
             print('Brak danych w klastrze')
         else: 
             print(df)
-            #odkomentowac te dwie linijki pod jesli chcesz zobaczyc wykresy
+            #odkomentowac tez te dwie linijki pod jesli chcesz zobaczyc wykresy
     #     tabelaScatterplot(df, i, axes)
     # plt.show()
     

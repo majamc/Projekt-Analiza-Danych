@@ -1,6 +1,7 @@
 import math
 import random
 import intro
+import numpy as np
 
 liczbaKlastrów=4
 # poczatkowa liczba klastrów
@@ -57,13 +58,25 @@ def EuklidesPower(krotkaNormal,centroida):
           suma+=difpow
    distance=math.sqrt(suma)
    return math.pow(distance,2)
+
+def Manhattan(krotkaNormal,centroida):
+#zwraca odleglosc manhattan dla danej krotkiNormal od danej centroidy
+    idx = [0,2,3,4] #bez 1 bo nie liczy sie płci
+    
+    krotkaFormated = np.array([krotkaNormal[i] for i in idx])
+    centroidaFormated = np.array([centroida[i] for i in idx])
+    
+    distance = np.sum(np.abs(krotkaFormated - centroidaFormated))
+    return distance
       
-def przypiszKrotkomNumeryKlastrów():
+def przypiszKrotkomNumeryKlastrów(metodaOdleglosci):
 #przypisanie każdej znormalizowanej krotce najbliższej centroidy
     for krotkaNormal in intro.krotkiNormal:
         minimum=1e100
         for i in range(len(Centroidy)):
-            next=EuklidesPower(krotkaNormal,Centroidy[i])
+            if metodaOdleglosci == 'manhattan':
+                next=Manhattan(krotkaNormal,Centroidy[i])
+            else: next=EuklidesPower(krotkaNormal,Centroidy[i])
             if next<minimum:
                 minimum=next
                 minimumIndex=i
