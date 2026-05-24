@@ -87,3 +87,24 @@ def optimise_k_means(max_k):
     plt.title('Metoda łokcia')
     plt.grid(True)
     plt.show()
+
+
+def wykres_liniowy_metryk(historia_euklides, historia_manhattan):
+    # na wykresie szukamy momentu stabilizacji, metoda ktora osiagnie to szybciej jest tą lepszą
+    plt.figure(figsize=(10, 6))
+
+    #rysujemy linię dla Euklidesa
+    plt.plot(range(1, len(historia_euklides) + 1), historia_euklides,
+             label='Odległość Euklidesowa', marker='o', color='red', linewidth=2)
+
+    #rysujemy linię dla Manhattana
+    plt.plot(range(1, len(historia_manhattan) + 1), historia_manhattan,
+             label='Odległość Manhattan', marker='s', color='blue', linewidth=2)
+
+    plt.xlabel('Numer iteracji (Aktualizacja centroidów)')
+    plt.ylabel('Suma błędów wewnątrz klastrów')
+    plt.title('Porównanie szybkości zbieżności: Euklides vs Manhattan')
+    plt.xticks(range(1, max(len(historia_euklides), len(historia_manhattan)) + 1)) #wymuszenie każdego numeru w iteracji 1,2,3,4...
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend() #pokazuje legendę z opisem linii
+    plt.show()
