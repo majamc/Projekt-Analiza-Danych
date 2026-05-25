@@ -1,5 +1,5 @@
 import intro
-import eda
+import analysis
 import calcul
 
 #zwiekszam do 10,by wykres liniowy pokazał trend spadku błędu w czasie
@@ -30,7 +30,7 @@ def main():
         calcul.utwórzKlastry()
         intro.denormalizujDane(calcul.klastry)
         intro.formatujKlastry()
-        eda.tabeleDlaKlastrów()
+        analysis.tabeleDlaKlastrów()
 
         repeat = 0
         while repeat < liczbaPowtórzeń:
@@ -51,12 +51,12 @@ def main():
             calcul.utwórzKlastry()
             intro.denormalizujDane(calcul.klastry)
             intro.formatujKlastry()
-            eda.tabeleDlaKlastrów()
+            analysis.tabeleDlaKlastrów()
             repeat += 1
 
     #po zakończeniu obu pętli generujemy wspólny wykres liniowy
-    eda.wykres_liniowy_metryk(historie_bledow['euklides'], historie_bledow['manhattan'])
+    analysis.wykres_liniowy_metryk(historie_bledow['euklides'], historie_bledow['manhattan'])
     # tu zmieniamy ilość klastów
-    eda.optimise_k_means(20)
+    analysis.optimise_k_means(20)
 
 main()

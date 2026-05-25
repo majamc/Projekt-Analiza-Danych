@@ -1,13 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
 import intro
 import seaborn as sns
 from sklearn.cluster import KMeans
 
-sciezkaDoDanych = os.path.join('..','TopBabyNamesbyState.csv')
-
-df = pd.read_csv(sciezkaDoDanych)
+df = pd.read_csv('TopBabyNamesbyState.csv')
 
 #Wykres z liczbą przykładów dla Top 10 imion (odkomentowac jesli chce sie uzyc)
 # df['Top Name'].value_counts().sort_values(ascending=False)[:10].plot(kind='bar')
@@ -18,8 +15,11 @@ df = pd.read_csv(sciezkaDoDanych)
 # plt.show()
 
 def tabeleDlaKlastrów():
-    fig, axes = plt.subplots(2, 3, figsize=(14, 6)) #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
-    axes = axes.flatten()
+    #wypisywanie klastrów w formie tabelek i wyświetlanie wykresów dla klastrów
+    #odkomentowac 2 linijki ponizej jesli chce sie zobaczyc wykresy !!!
+    # fig, axes = plt.subplots(2, 3, figsize=(14, 6))
+    # axes = axes.flatten()
+    #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
     for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
         df = pd.DataFrame({"State": [], "Gender": [], "Year": [], "Top Name": [], "Occurences": []})
         nrKlastra = i
@@ -32,8 +32,8 @@ def tabeleDlaKlastrów():
         else: 
             print(df)
             #odkomentowac te dwie linijki pod jesli chcesz zobaczyc wykresy
-        tabelaScatterplot(df, i, axes)
-    plt.show()
+    #     tabelaScatterplot(df, i, axes)
+    # plt.show()
 
 #narazie zrobilam tak ale nwm czy to jest optymalne kiedy bedziemy miec wiecej danych i klastrow
 #plus te legendy co znacza punkty sa strasznie duze i dlugie

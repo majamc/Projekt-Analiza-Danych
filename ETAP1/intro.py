@@ -3,7 +3,6 @@
 # słowniki normalizacyjne do zmiennych tekstowych,
 # funkcje wczytywania i wypisywania krotek,
 # funkcję normalizacji danych
-import os
 
 def test():
     wczytajDane()
@@ -16,8 +15,6 @@ krotkiNormal=[]
 zdenormalizowaneKlastry = []
 zdenormalizowaneKlastryBezNrCentroid = []
 zdenormalizowaneCentroidy = []
-
-sciezkaDoDanychCsv = os.path.join('..','TopBabyNamesbyState.csv')
 
 # definicje słowników normalizacyjnych dla zmiennych tekstowych
 states={'AK':2,'AL':4,'AR':6,'AZ':8,'CA':10,'CO':12,'CT':14,'DC':16,'DE':18,
@@ -47,7 +44,7 @@ names= {'Mary':1,'Linda':2,'Debra':3,'Lisa':4,'Michelle':5,'Jennifer':6,'Jessica
 def wczytajDane():
 # wczytuje dane ze wskazanego pliku tekstowego do listy krotkiDane
    import csv
-   with open('Dane.txt','r') as csvfile:
+   with open('TopBabyNamesByState.csv','r') as csvfile:
       csvreader = csv.reader(csvfile)
       for krotka in csvreader:
          if 'State' in krotka: #warunek żeby nie wczytywać nazw kolumn z pliku z danymi

@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
 import intro
 import seaborn as sns
 from sklearn.cluster import KMeans
@@ -103,7 +102,7 @@ def wykres_liniowy_metryk(historia_euklides, historia_manhattan):
 
     plt.xlabel('Numer iteracji (Aktualizacja centroidów)')
     plt.ylabel('Suma błędów wewnątrz klastrów')
-    plt.title('Porównanie szybkości zbieżności: Euklides vs Manhattan')
+    plt.title('Porównanie metryk: Euklides vs Manhattan')
     plt.xticks(range(1, max(len(historia_euklides), len(historia_manhattan)) + 1)) #wymuszenie każdego numeru w iteracji 1,2,3,4...
     plt.grid(True, linestyle='--', alpha=0.6)
     plt.legend() #pokazuje legendę z opisem linii

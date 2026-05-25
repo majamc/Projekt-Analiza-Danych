@@ -14,7 +14,7 @@ admissionType = {"Elective": 0, "Urgent": 1, "Emergency": 2}
 
 def wczytajDane():
 #wczytanie danych ze zbioru do listy krotkiDane
-   with open('HealthcareDataset_midi.csv','r') as csvfile:
+   with open('HealthcareDataset.csv','r') as csvfile:
       csvreader = csv.reader(csvfile)
       for krotka in csvreader:
          if 'Gender' in krotka: #warunek żeby nie wczytywać nazw kolumn z pliku z danymi
@@ -33,7 +33,6 @@ def minMaxAge():
 def normalizujDane():
 #normalizowanie danych z listy krotkiDane i wpisanie ich do listy krotkiNormal
 #-1 oznacza, że nie wpisano jeszcze numeru klastra, do którego należy krotka
-
    minAge, maxAge = minMaxAge()
 
    for i in range(len(krotkiDane)):

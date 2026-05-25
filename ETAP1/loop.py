@@ -1,6 +1,6 @@
 import intro
 import calcul
-import eda
+import analysis
 
 liczbaPowtórzeń=1
 # ograniczenie liczby powtórzeń pętli
@@ -23,7 +23,7 @@ def main():
     #eda.tabeleDlaKlastrów()
 
     #tu zmieniamy ilość klastów
-    eda.optimise_k_means(50)
+    analysis.optimise_k_means(50)
     
     # poniżej założono blokadę pętli (zdjełam blokade)
     repeat=0
