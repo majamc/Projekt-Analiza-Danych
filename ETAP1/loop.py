@@ -2,8 +2,7 @@ import intro
 import calcul
 import analysis
 
-liczbaPowtórzeń=1
-# ograniczenie liczby powtórzeń pętli
+liczbaPowtórzeń=10 #powtórzenia pętli
 
 def main():
     print('\nLICZBA KLASTRÓW ',calcul.liczbaKlastrów)
@@ -20,7 +19,7 @@ def main():
     #calcul.wypiszKlastry()
     #calcul.wypiszKlastryDenormalizowane()
     intro.formatujKlastry()
-    #eda.tabeleDlaKlastrów()
+    analysis.tabeleDlaKlastrów()
 
     #tu zmieniamy ilość klastów
     analysis.optimise_k_means(50)
@@ -38,7 +37,7 @@ def main():
         #calcul.wypiszKlastry()
         #calcul.wypiszKlastryDenormalizowane()
         intro.formatujKlastry()
-        #eda.tabeleDlaKlastrów()
+        analysis.tabeleDlaKlastrów()
         repeat+=1
 
 main()

@@ -18,10 +18,27 @@ df = pd.read_csv("HealthcareDataset.csv")
 
 def tabeleDlaKlastrów():
     #wypisywanie klastrów w formie tabelek i wyświetlanie wykresów dla klastrów
-    #odkomentowac 2 linijki ponizej jesli chce sie zobaczyc wykresy !!!
-    # fig, axes = plt.subplots(2, 3, figsize=(14, 6))
-    # axes = axes.flatten()
-    #2 = wiersze, 3 = kolumny bo narazie dla 6 klastrów (przy innej ilosci klastrow zmienic bo inaczej sie wywlali blad)
+    fig, axes = plt.subplots(2, 3, figsize=(15, 7)) #2 wiersze, 3 kolumny
+    axes = axes.flatten()
+    
+    #wykres pomocniczy do wspólnej legendy dla wszystkich wykresów klastrów
+    fig_tmp, ax_tmp = plt.subplots()
+    tmp_df = pd.DataFrame(columns=['Age','Gender','Medical Condition','Medication','Admission Type'])
+    for cluster in intro.zdenormalizowaneKlastryBezNrCentroid:
+        for row in cluster:
+            tmp_df.loc[len(tmp_df)] = row
+    sns.scatterplot(
+        data=tmp_df,
+        x='Age',
+        y='Medication',
+        size='Admission Type',
+        hue='Gender',
+        style='Medical Condition',
+        ax=ax_tmp
+    )
+    handles, labels = ax_tmp.get_legend_handles_labels()
+    plt.close(fig_tmp) #ukrycie pomocniczego wykresu
+    
     for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
         df = pd.DataFrame({"Age": [], "Gender": [], "Medical Condition": [], "Medication": [], "Admission Type": []})
         nrKlastra = i
@@ -33,22 +50,33 @@ def tabeleDlaKlastrów():
             print('Brak danych w klastrze')
         else: 
             print(df)
-            #odkomentowac tez te dwie linijki pod jesli chcesz zobaczyc wykresy
-    #     tabelaScatterplot(df, i, axes)
-    # plt.show()
+            tabelaScatterplot(df, i, axes)
+    fig.delaxes(axes[5]) #usunięcie 6 wykresu bo jest nie używany
+    fig.legend( #dostosowanie legendy
+        handles,
+        labels,
+        loc='lower center',
+        bbox_to_anchor=(0.85, 0.1),
+        ncol=2
+    )
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95]) #żeby się nie nachodziły napisy itp.
+    plt.show()
     
 def tabelaScatterplot(df, i, axes):
     #wykres rozrzutu dla wszystkich danych danego klastra
     sns.scatterplot(
         data=df,
         x='Age',
-        y='Medical Condition',
+        y='Medication',
         size='Admission Type',
         hue='Gender',
-        style='Medication',
-        ax=axes[i]
+        style='Medical Condition',
+        ax=axes[i],
+        legend=False
     )
     axes[i].set_title(f'Klaster {i}')
+    axes[i].set_ylabel("")
 
 def optimise_k_means(max_k):
     #tworzymy tabele z danych znormalizowanych

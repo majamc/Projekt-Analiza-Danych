@@ -3,10 +3,8 @@ import random
 import intro
 import numpy as np
 
-liczbaKlastrów=4
-# poczatkowa liczba klastrów
-klastry=[]
-#każdy z klastrów jest listą krotekNormal położonych najbliżej centroidy
+liczbaKlastrów=5 #poczatkowa liczba klastrów
+klastry=[] #klaster = lista krotekNormal położonych najbliżej centroidy
 Centroidy=[]
 
 def losujCentroide():
@@ -47,7 +45,6 @@ def wypiszCentroidyDenormalizowane():
    for centroida in intro.zdenormalizowaneCentroidy:
       wypiszCentroideDenormalizowana(centroida)
 
-#TODO dodac inne metryki
 def EuklidesPower(krotkaNormal,centroida):
 #zwraca kwadrat odległości euklidesowej danej krotkiNormal od danej centroidy
    suma=0
