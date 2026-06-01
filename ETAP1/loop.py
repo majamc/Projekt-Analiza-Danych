@@ -22,9 +22,9 @@ def main():
     analysis.tabeleDlaKlastrów()
 
     #tu zmieniamy ilość klastów
-    analysis.optimise_k_means(50)
+    analysis.optimise_k_means(10) #metoda łokcia do analizy liczby klastrów
     
-    # poniżej założono blokadę pętli (zdjełam blokade)
+    #blokada pętli
     repeat=0
     while repeat < liczbaPowtórzeń:
         calcul.newCentroidy()

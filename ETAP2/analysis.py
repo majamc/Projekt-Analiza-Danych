@@ -27,6 +27,9 @@ def tabeleDlaKlastrów():
     for cluster in intro.zdenormalizowaneKlastryBezNrCentroid:
         for row in cluster:
             tmp_df.loc[len(tmp_df)] = row
+    all_admissions = sorted(tmp_df['Admission Type'].unique())
+    all_genders = sorted(tmp_df['Gender'].unique())
+    all_conditions = sorted(tmp_df['Medical Condition'].unique())
     sns.scatterplot(
         data=tmp_df,
         x='Age',
@@ -34,23 +37,33 @@ def tabeleDlaKlastrów():
         size='Admission Type',
         hue='Gender',
         style='Medical Condition',
+        hue_order=all_genders,
+        style_order=all_conditions,
+        size_order=all_admissions,
         ax=ax_tmp
     )
     handles, labels = ax_tmp.get_legend_handles_labels()
     plt.close(fig_tmp) #ukrycie pomocniczego wykresu
     
+    dfCentroidy = pd.DataFrame(
+        intro.zdenormalizowaneCentroidy,
+        columns=[
+            "Age", "Gender", "Medical Condition", "Medication", "Admission Type"
+        ]
+    )
+    
     for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
         df = pd.DataFrame({"Age": [], "Gender": [], "Medical Condition": [], "Medication": [], "Admission Type": []})
-        nrKlastra = i
+        centroida = dfCentroidy.iloc[[i]] #branie centroidy dla tego klastra
         print('')
-        print('Tabela danych dla klastra', nrKlastra)
+        print('Tabela danych dla klastra', i)
         for j in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid[i])):
             df.loc[len(df)] = intro.zdenormalizowaneKlastryBezNrCentroid[i][j]
         if df.empty:
             print('Brak danych w klastrze')
         else: 
             print(df)
-            tabelaScatterplot(df, i, axes)
+            tabelaScatterplot(df, i, axes, centroida)
     fig.delaxes(axes[5]) #usunięcie 6 wykresu bo jest nie używany
     fig.legend( #dostosowanie legendy
         handles,
@@ -63,8 +76,11 @@ def tabeleDlaKlastrów():
     plt.tight_layout(rect=[0, 0, 1, 0.95]) #żeby się nie nachodziły napisy itp.
     plt.show()
     
-def tabelaScatterplot(df, i, axes):
+def tabelaScatterplot(df, i, axes, centroida):
     #wykres rozrzutu dla wszystkich danych danego klastra
+    all_admissions = sorted(df['Admission Type'].unique())
+    all_genders = sorted(df['Gender'].unique())
+    all_conditions = sorted(df['Medical Condition'].unique())
     sns.scatterplot(
         data=df,
         x='Age',
@@ -72,6 +88,17 @@ def tabelaScatterplot(df, i, axes):
         size='Admission Type',
         hue='Gender',
         style='Medical Condition',
+        hue_order=all_genders,
+        style_order=all_conditions,
+        size_order=all_admissions,
+        ax=axes[i],
+        legend=False
+    )
+    sns.scatterplot(
+        data=centroida,
+        x='Age',
+        y='Medication',
+        color='black',
         ax=axes[i],
         legend=False
     )
@@ -108,7 +135,7 @@ def optimise_k_means(max_k):
         bledyKlastrow.append(kmeans.inertia_)
     plt.figure(figsize=(10, 5))
     plt.plot(means, bledyKlastrow, 'o-')
-    plt.xticks(means)
+    #plt.xticks(means)
     plt.xlabel('Liczba klastrów (k)')
     plt.ylabel('Ilość błędów')
     plt.title('Metoda łokcia')

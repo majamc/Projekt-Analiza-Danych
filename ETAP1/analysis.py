@@ -25,30 +25,47 @@ def tabeleDlaKlastrów():
     for cluster in intro.zdenormalizowaneKlastryBezNrCentroid:
         for row in cluster:
             tmp_df.loc[len(tmp_df)] = row
+    all_states = sorted(tmp_df['State'].unique())
+    all_genders = sorted(tmp_df['Gender'].unique())
+    all_names = sorted(tmp_df['Top Name'].unique())
     sns.scatterplot(
         data=tmp_df,
         x='Occurences',
         y='Year',
-        size='Top Name',
         hue='State',
         style='Gender',
+        size='Top Name',
+        style_order=all_genders,
+        hue_order=all_states,
+        size_order=all_names,
         ax=ax_tmp
     )    
     handles, labels = ax_tmp.get_legend_handles_labels()
     plt.close(fig_tmp) #ukrycie pomocniczego wykresu
     
+    dfCentroidy = pd.DataFrame(
+        intro.zdenormalizowaneCentroidy,
+        columns=[
+            'State',
+            'Gender',
+            'Year',
+            'Top Name',
+            'Occurences'
+        ]
+    )
+    
     for i in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid)):
         df = pd.DataFrame({"State": [], "Gender": [], "Year": [], "Top Name": [], "Occurences": []})
-        nrKlastra = i
+        centroida = dfCentroidy.iloc[[i]] #branie centroidy dla tego klastra
         print('')
-        print('Tabela danych dla klastra', nrKlastra)
+        print('Tabela danych dla klastra', i)
         for j in range(0,len(intro.zdenormalizowaneKlastryBezNrCentroid[i])):
             df.loc[len(df)] = intro.zdenormalizowaneKlastryBezNrCentroid[i][j]
         if df.empty:
             print('Brak danych w klastrze')
         else: 
             print(df)
-            tabelaScatterplot(df, i, axes)
+            tabelaScatterplot(df, i, axes, centroida)
     fig.legend( #dostosowanie legendy
         handles,
         labels,
@@ -61,15 +78,29 @@ def tabeleDlaKlastrów():
     plt.tight_layout(rect=[0, 0, 0.7, 1]) #żeby się nie nachodziły napisy itp.
     plt.show()
 
-def tabelaScatterplot(df, i, axes):
+def tabelaScatterplot(df, i, axes, centroida):
     #tworzy wykres rozrzutu dla wszystkich danych danego klastra
+    all_states = sorted(df['State'].unique())
+    all_genders = sorted(df['Gender'].unique())
+    all_names = sorted(df['Top Name'].unique())
     sns.scatterplot(
         data=df,
         x='Occurences',
         y='Year',
-        size='Top Name',
         hue='State',
         style='Gender',
+        size='Top Name',
+        hue_order=all_states,
+        style_order=all_genders,
+        size_order=all_names,
+        ax=axes[i],
+        legend=False
+    )
+    sns.scatterplot(
+        data=centroida,
+        x='Occurences',
+        y='Year',
+        color='black',
         ax=axes[i],
         legend=False
     )

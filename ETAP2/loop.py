@@ -2,8 +2,7 @@ import intro
 import analysis
 import calcul
 
-#zwiekszam do 10,by wykres liniowy pokazał trend spadku błędu w czasie
-liczbaPowtórzeń = 10
+liczbaPowtórzeń = 20
 
 def main():
     print('\nLICZBA KLASTRÓW', calcul.liczbaKlastrów)
@@ -19,7 +18,6 @@ def main():
     metryki_do_testu = ['euklides', 'manhattan']
 
     for metryka in metryki_do_testu:
-        #ten print to dla estetyki mozemy usunac
         print(f"\n=================== START EKSPERYMENTU: {metryka.upper()} ===================")
         #przywracamy identyczne centroidy startowe dla sprawiedliwego porównania
         calcul.Centroidy = poczatkowe_centroidy.copy()
@@ -57,6 +55,6 @@ def main():
     #po zakończeniu obu pętli generujemy wspólny wykres liniowy
     analysis.wykres_liniowy_metryk(historie_bledow['euklides'], historie_bledow['manhattan'])
     # tu zmieniamy ilość klastów
-    analysis.optimise_k_means(20)
+    analysis.optimise_k_means(10)
 
 main()

@@ -5,6 +5,7 @@ import numpy as np
 
 liczbaKlastrów=5 #poczatkowa liczba klastrów
 klastry=[] #klaster = lista krotekNormal położonych najbliżej centroidy
+#uwaga!! przy zmienianiu zeby ladnie sie wyswietalaly wykresy nalezy zmnienic plt.subplots w pliku analysis zeby bylo tyle wykresow co klastrow (lub wiecej ale nie mniej)
 Centroidy=[]
 
 def losujCentroide():

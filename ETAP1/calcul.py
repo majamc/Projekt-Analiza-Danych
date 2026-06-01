@@ -1,16 +1,14 @@
 #moduł przechowuje początkową liczbę klastrów,
 #oraz poczatkową pustą listę klastrów i centroidów.
-#UWAGA: wartości poczatkowe zmiennych modułowych
-#       są dostępne po każdorazowym załadowaniu modułu
+#UWAGA: wartości poczatkowe zmiennych modułowych są dostępne po każdorazowym załadowaniu modułu
 
 import math
 import random
 import intro
 
-liczbaKlastrów=4
-# poczatkowa liczba klastrów
-klastry=[]
-#każdy z klastrów jest listą krotekNormal położonych najbliżej centroidy
+liczbaKlastrów=4 #poczatkowa liczba klastrów
+#uwaga!! przy zmienianiu zeby ladnie sie wyswietalaly wykresy nalezy zmnienic plt.subplots w pliku analysis zeby bylo tyle wykresow co klastrow (lub wiecej ale nie mniej)
+klastry=[] #każdy z klastrów jest listą krotekNormal położonych najbliżej centroidy
 Centroidy=[]
 
 def test():
