@@ -129,13 +129,11 @@ def optimise_k_means(max_k):
             random_state=42,
             n_init=10
         )
-        #uczenie modelu na danych
         kmeans.fit(data)
         means.append(k)
         bledyKlastrow.append(kmeans.inertia_)
     plt.figure(figsize=(10, 5))
     plt.plot(means, bledyKlastrow, 'o-')
-    #plt.xticks(means)
     plt.xlabel('Liczba klastrów (k)')
     plt.ylabel('Ilość błędów')
     plt.title('Metoda łokcia')
@@ -160,5 +158,5 @@ def wykres_liniowy_metryk(historia_euklides, historia_manhattan):
     plt.title('Porównanie metryk: Euklides vs Manhattan')
     plt.xticks(range(1, max(len(historia_euklides), len(historia_manhattan)) + 1)) #wymuszenie każdego numeru w iteracji 1,2,3,4...
     plt.grid(True, linestyle='--', alpha=0.6)
-    plt.legend() #pokazuje legendę z opisem linii
+    plt.legend()
     plt.show()

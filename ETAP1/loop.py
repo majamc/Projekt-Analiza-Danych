@@ -21,10 +21,8 @@ def main():
     intro.formatujKlastry()
     analysis.tabeleDlaKlastrów()
 
-    #tu zmieniamy ilość klastów
     analysis.optimise_k_means(10) #metoda łokcia do analizy liczby klastrów
-    
-    #blokada pętli
+
     repeat=0
     while repeat < liczbaPowtórzeń:
         calcul.newCentroidy()

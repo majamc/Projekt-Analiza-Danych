@@ -32,7 +32,7 @@ def main():
 
         repeat = 0
         while repeat < liczbaPowtórzeń:
-            # 1. Logika obliczania błędu AKTUALNEGO stanu (do wykresu liniowego)
+            #logika obliczania błędu AKTUALNEGO stanu (do wykresu liniowego)
             błed_iteracji = 0
             for i in range(len(calcul.Centroidy)):
                 for krotka in calcul.klastry[i]:
@@ -55,6 +55,6 @@ def main():
     #po zakończeniu obu pętli generujemy wspólny wykres liniowy
     analysis.wykres_liniowy_metryk(historie_bledow['euklides'], historie_bledow['manhattan'])
     # tu zmieniamy ilość klastów
-    analysis.optimise_k_means(10)
+    analysis.optimise_k_means(10) #metoda łokcia do analizy liczby klastrów
 
 main()

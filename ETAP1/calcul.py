@@ -46,7 +46,6 @@ def losujCentroide():
     return centroida
 
 def losujCentroidy():
-# losuje określoną przez liczbę klastrów poczatkowe położenia centroid
     i=1
     while i<=liczbaKlastrów:
         Centroidy.append(losujCentroide())
@@ -130,7 +129,6 @@ def wypiszKlastryDenormalizowane():
 def newCentroide(klaster):
 # oblicza nowe położenie centroidy we wskazanym klastrze
 # i zwraca wynik w postaci nowej centroidy dla wskazanego klastra
-    #poprawa błędu dzielenia przez 0
     if len(klaster) == 0:
         return losujCentroide()
 

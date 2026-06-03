@@ -8,7 +8,6 @@ df = pd.read_csv('TopBabyNamesbyState.csv')
 
 #Wykres z liczbą przykładów dla Top 10 imion (odkomentowac jesli chce sie uzyc)
 # df['Top Name'].value_counts().sort_values(ascending=False)[:10].plot(kind='bar')
-
 # plt.ylabel('Liczba przykładów')
 # plt.xlabel('')
 # plt.title('Liczba przykładów dla Top 10 imion')
@@ -16,7 +15,7 @@ df = pd.read_csv('TopBabyNamesbyState.csv')
 
 def tabeleDlaKlastrów():
     #wypisywanie klastrów w formie tabelek i wyświetlanie wykresów dla klastrów
-    fig, axes = plt.subplots(2, 2, figsize=(15, 7)) #2 wiersze, 2 kolumny
+    fig, axes = plt.subplots(2, 2, figsize=(15, 7))
     axes = axes.flatten()
     
     #wykres pomocniczy do wspólnej legendy dla wszystkich wykresów klastrów
@@ -75,7 +74,7 @@ def tabeleDlaKlastrów():
         fontsize=8
     )
 
-    plt.tight_layout(rect=[0, 0, 0.7, 1]) #żeby się nie nachodziły napisy itp.
+    plt.tight_layout(rect=[0, 0, 0.7, 1])
     plt.show()
 
 def tabelaScatterplot(df, i, axes, centroida):
@@ -108,7 +107,7 @@ def tabelaScatterplot(df, i, axes, centroida):
     axes[i].set_ylabel("Rok")
     axes[i].set_xlabel("Liczba wystąpień")
 
-#obliczanie poprawnej ilości klastrów
+#obliczanie poprawnej ilości klastrów (metoda łokcia)
 def optimise_k_means(max_k):
     #tworzymy tabele z danych znormalizowanych
     data = pd.DataFrame(
@@ -133,7 +132,6 @@ def optimise_k_means(max_k):
             random_state=42,
             n_init=10
         )
-        #uczenie modelu na danych
         kmeans.fit(data)
         means.append(k)
         bledyKlastrow.append(kmeans.inertia_)
